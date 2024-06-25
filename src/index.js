@@ -19,6 +19,7 @@ function refreshWeather(response) {
 
   getForecast(response.data.city);
 }
+
 function formatDate(date) {
   let minutes = date.getMinutes();
   let hours = date.getHours();
@@ -32,15 +33,17 @@ function formatDate(date) {
     "Saturday",
   ];
   let day = days[date.getDay()];
+
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
 
   return `${day} ${hours}:${minutes}`;
 }
+
 function searchCity(city) {
   let apiKey = "t134c4977ef73a2f9a6202bcb4ea1dob";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(refreshWeather);
 }
 
@@ -92,6 +95,7 @@ function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHtml;
 }
+
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
